@@ -1,0 +1,142 @@
+@import "../../variables";
+
+.note {
+  display: flex;
+  width: 525px;
+  padding: 12px 0px 12px 0px;
+  background-color: var(#{--color-default});
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: var(#{--text-color-default});
+
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid desaturate($accent, 30%);
+}
+.tools {
+  display: flex;
+  width: 40px;
+  justify-content: space-between;
+
+  .iconTrash {
+    cursor: pointer;
+    path {
+      stroke: #cdcdcd;
+      transition: stroke 0.3s ease;
+    }
+    &:hover {
+      path {
+        stroke: #e50000;
+      }
+    }
+  }
+  .iconEdit {
+    cursor: pointer;
+    path {
+      stroke: #cdcdcd;
+      transition: stroke 0.3s ease;
+    }
+    &:hover {
+      path {
+        stroke: $accent;
+      }
+    }
+  }
+}
+.task {
+  display: flex;
+  align-items: center;
+
+  .contain {
+    position: relative;
+    max-width: 400px;
+    padding: 10px;
+  }
+  p {
+    margin-left: 10px;
+    font-weight: 700;
+    cursor: default;
+  }
+
+  .text {
+    overflow: hidden; /* Убираем полосу прокрутки */
+    overflow-x: hidden; /* Скрываем переполнение по оси X */
+    word-wrap: break-word; /* Перенос длинных слов */
+    overflow-wrap: break-word; /* Современный аналог word-wrap */
+    font-size: 16px;
+    transition: color 0.3s ease; /* Плавный переход для цвета */
+  }
+
+  .checked {
+    color: gray; /* Цвет текста при зачеркивании */
+  }
+
+  .checked::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px; /* Толщина линии */
+    background-color: gray; /* Цвет линии */
+    transform: translateY(-50%) scaleX(0); /* Начальное состояние (не видно) */
+    transition: transform 0.9s ease; /* Плавный переход для линии */
+  }
+
+  .checked::after {
+    transform: translateY(-50%) scaleX(1); /* Конечное состояние (линия видима) */
+  }
+}
+
+.customCheckbox {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.customCheckbox input {
+  display: none; /* Скрываем стандартный чекбокс */
+}
+
+.checkmark {
+  width: 26px;
+  height: 26px;
+  border: 1px solid $accent;
+  border-radius: 2px; /* Закругление углов */
+  margin-right: 10px;
+  position: relative;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.customCheckbox input:checked + .checkmark {
+  background-color: $accent; /* Цвет фона при выборе */
+  border-color: $accent; /* Цвет рамки при выборе */
+}
+
+.customCheckbox input:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 4px;
+  width: 6px;
+  height: 12px;
+  border: solid white; /* Цвет галочки */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
